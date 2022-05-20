@@ -11,6 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Widget test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(App());
+    await tester.pumpWidget(const App());
   });
 }
