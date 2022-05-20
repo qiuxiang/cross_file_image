@@ -45,6 +45,7 @@ class XFileImage extends ImageProvider<XFileImage> {
 
     if (bytes.lengthInBytes == 0) {
       // The file may become available later.
+      // ignore: unnecessary_non_null_assertion
       PaintingBinding.instance!.imageCache!.evict(key);
       throw StateError('$file is empty and cannot be loaded as an image.');
     }
