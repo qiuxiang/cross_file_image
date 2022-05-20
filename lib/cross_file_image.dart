@@ -44,7 +44,6 @@ class XFileImage extends ImageProvider<XFileImage> {
     final Uint8List bytes = await file.readAsBytes();
 
     if (bytes.lengthInBytes == 0) {
-      // The file may become available later.
       PaintingBinding.instance.imageCache.evict(key);
       throw StateError('$file is empty and cannot be loaded as an image.');
     }

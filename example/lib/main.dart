@@ -3,13 +3,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:cross_file_image/cross_file_image.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
       home: HomePage(),
     );
@@ -17,13 +19,13 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   XFile? file;
 
   @override
@@ -31,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: file == null
-            ? Text('Click floating button to pick some image')
+            ? const Text('Click floating button to pick some image')
             : Image(image: XFileImage(file!)),
       ),
       floatingActionButton: FloatingActionButton(
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           setState(() => this.file = file);
         },
         tooltip: 'Pick Image',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
