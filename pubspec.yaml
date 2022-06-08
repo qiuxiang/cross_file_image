@@ -1,6 +1,6 @@
 name: cross_file_image
 description: ImageProvider for XFile.
-version: 0.0.3
+version: 1.0.0
 homepage: https://github.com/qiuxiang/cross_file_image
 
 environment:
