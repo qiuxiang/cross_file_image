@@ -27,9 +27,9 @@ class XFileImage extends ImageProvider<XFileImage> {
       SynchronousFuture<XFileImage>(this);
 
   @override
-  ImageStreamCompleter loadBuffer(
+  ImageStreamCompleter loadImage(
     final XFileImage key,
-    final DecoderBufferCallback decode,
+    final ImageDecoderCallback decode,
   ) =>
       MultiFrameImageStreamCompleter(
         codec: _loadAsync(key, decode),
@@ -42,7 +42,7 @@ class XFileImage extends ImageProvider<XFileImage> {
 
   Future<ui.Codec> _loadAsync(
     final XFileImage key,
-    final DecoderBufferCallback decode,
+    final ImageDecoderCallback decode,
   ) async {
     final bytes = await file.readAsBytes();
 
