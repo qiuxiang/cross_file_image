@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:cross_file/cross_file.dart';
@@ -24,24 +23,28 @@ class XFileImage extends ImageProvider<XFileImage> {
   final double scale;
 
   @override
-  Future<XFileImage> obtainKey(ImageConfiguration configuration) {
-    return SynchronousFuture<XFileImage>(this);
-  }
+  Future<XFileImage> obtainKey(final ImageConfiguration configuration) =>
+      SynchronousFuture<XFileImage>(this);
 
   @override
-  ImageStreamCompleter load(XFileImage key, DecoderCallback decode) {
-    return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(key, decode),
-      scale: key.scale,
-      debugLabel: key.file.path,
-      informationCollector: () sync* {
-        yield ErrorDescription('Path: ${file.path}');
-      },
-    );
-  }
+  ImageStreamCompleter loadImage(
+    final XFileImage key,
+    final ImageDecoderCallback decode,
+  ) =>
+      MultiFrameImageStreamCompleter(
+        codec: _loadAsync(key, decode),
+        scale: key.scale,
+        debugLabel: key.file.path,
+        informationCollector: () sync* {
+          yield ErrorDescription('Path: ${file.path}');
+        },
+      );
 
-  Future<ui.Codec> _loadAsync(XFileImage key, DecoderCallback decode) async {
-    final Uint8List bytes = await file.readAsBytes();
+  Future<ui.Codec> _loadAsync(
+    final XFileImage key,
+    final ImageDecoderCallback decode,
+  ) async {
+    final bytes = await file.readAsBytes();
 
     if (bytes.lengthInBytes == 0) {
       // The file may become available later.
@@ -49,19 +52,23 @@ class XFileImage extends ImageProvider<XFileImage> {
       throw StateError('$file is empty and cannot be loaded as an image.');
     }
 
-    return decode(bytes);
+    final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
+
+    return decode(buffer);
   }
 
   @override
-  bool operator ==(Object other) {
-    if (other.runtimeType != runtimeType) return false;
+  bool operator ==(final Object other) {
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
     return other is XFileImage &&
         other.file.path == file.path &&
         other.scale == scale;
   }
 
   @override
-  int get hashCode => hashValues(file.path, scale);
+  int get hashCode => Object.hash(file.path, scale);
 
   @override
   String toString() =>
