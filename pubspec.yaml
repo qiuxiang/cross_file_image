@@ -1,7 +1,7 @@
 name: cross_file_image
 description: ImageProvider for XFile.
-version: 1.0.2
-homepage: https://github.com/WatchDogsDev/cross_file_image
+version: 1.1.0
+homepage: https://github.com/qiuxiang/cross_file_image
 
 environment:
   sdk: ">=2.14.0 <4.0.0"
