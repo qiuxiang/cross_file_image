@@ -16,8 +16,7 @@ jobs:
         run: |
           cd example
           flutter create --platforms web .
-          sed -i 's/<base href="\/">//' web/index.html
-          flutter build web
+          flutter build web --base-href /cross_file_image/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
